@@ -18,8 +18,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
-Route::get('/home/posts', 'HomeController@posts')->name('posts')->middleware('auth');
+Route::get('/home/myposts', 'HomeController@posts')->name('posts')->middleware('auth');
 Route::get('/home/create', 'PostController@create')->name('create')->middleware('auth');
 Route::get('/home/categories', 'HomeController@showCategories')->name('categories')->middleware('auth');
 Route::get('/home/myaccount', 'HomeController@posts')->name('account')->middleware('auth');
-Route::get('/home', 'PostController@storePost')->middleware('auth');
+Route::post('/home', 'PostController@storePost')->middleware('auth');
+Route::get('/home/{postslot}', 'HomeController@showPost')->middleware('auth');

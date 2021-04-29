@@ -19,7 +19,7 @@ class CreatePostsTable extends Migration
             $table->string('postname');
             $table->string('category');
             $table->text('articletext');
-            $table->integer('postslot');
+            $table->string('postslot');
             $table->string('postedby');
         });
     }
