@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Posts;
 use App\Category;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -40,8 +41,17 @@ class HomeController extends Controller
 
     // function to show a specific post according to the postslot
     public function showPost($postslot) {
-        $post = Posts::where('postslot', $postslot)->get();
+        $post = Posts::where('postslot', $postslot)->first();
 
         return view('post', ['post' => $post]);
     }
+
+    public function myPosts() {
+        $postedby = Auth::user()->name;
+        $myposts = Posts::where('postedby', $postedby)->get();
+
+        return view('posts', ['myposts' => $myposts]);
+    }
+
+    
 }

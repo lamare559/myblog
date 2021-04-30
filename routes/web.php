@@ -18,9 +18,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
-Route::get('/home/myposts', 'HomeController@posts')->name('posts')->middleware('auth');
+Route::get('/home/myposts', 'HomeController@myPosts')->name('posts')->middleware('auth');
 Route::get('/home/create', 'PostController@create')->name('create')->middleware('auth');
 Route::get('/home/categories', 'HomeController@showCategories')->name('categories')->middleware('auth');
 Route::get('/home/myaccount', 'HomeController@posts')->name('account')->middleware('auth');
 Route::post('/home', 'PostController@storePost')->middleware('auth');
 Route::get('/home/{postslot}', 'HomeController@showPost')->middleware('auth');
+Route::get('/home/update/{postslot}', 'PostController@update')->middleware('auth');
+Route::post('/home/myposts/{postslot}', 'PostController@edit')->name('update')->middleware('auth');
+Route::delete('/home/myposts/{id}', 'PostController@delete')->name('deletes')->middleware('auth');

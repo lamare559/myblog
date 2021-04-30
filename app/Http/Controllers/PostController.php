@@ -46,4 +46,27 @@ class PostController extends Controller
 
         return redirect('/home')->with('success', 'Post successfully added!!');
     }
+
+    public function update($postslot) {
+        $posts = Posts::firstWhere('postslot', $postslot);
+        return view('update', ['posts' => $posts, 'postslot' => $postslot]);
+    }
+
+    public function edit(Request $request, $postslot) {
+
+        $posts = Posts::firstWhere('postslot', $postslot);
+        $posts->update([
+            'postname' => request('postname'),
+            'articletext' => request('articletext')
+        ]);
+
+        return redirect('/home/myposts')->with('success', 'Post successfully updated!!');
+    }
+
+    public function delete($id) {
+        $post = Posts::firstWhere('id', $id);
+        $post->delete();
+
+        return redirect('/home/myposts')->with('success', 'Post successfully deleted!!');
+    }
 }
